@@ -1,0 +1,537 @@
+[gd_scene load_steps=17 format=3 uid="uid://cq5w2d3tpaupt"]
+
+[ext_resource type="Script" uid="uid://cic38tuefrmfs" path="res://script/quiz.gd" id="1_nvpjn"]
+[ext_resource type="Texture2D" uid="uid://drobw51v5u87f" path="res://asset/Garnish/DELIVERY ME.png" id="2_kgkd6"]
+[ext_resource type="JSON" path="res://source/situation1.json" id="2_wed3b"]
+[ext_resource type="FontFile" uid="uid://bvfe4l4req58" path="res://asset/Font/Sarabun-ExtraBoldItalic.ttf" id="3_g1cwy"]
+[ext_resource type="Texture2D" uid="uid://cts5midkoaxs1" path="res://asset/Situation_1/Nurse/nurse_thump_up.png" id="3_kgkd6"]
+[ext_resource type="Texture2D" uid="uid://dtsix6k8ux7it" path="res://asset/Garnish/try_again.png" id="5_g1cwy"]
+[ext_resource type="Texture2D" uid="uid://6occfc15km8x" path="res://asset/Garnish/answer_icon.png" id="6_7bg5i"]
+[ext_resource type="Texture2D" uid="uid://dmj0gt7umgftk" path="res://asset/Level-select/Situation_1.png" id="8_wed3b"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7bg5i"]
+bg_color = Color(1, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5806h"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k3hp7"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_euybl"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1f0vb"]
+bg_color = Color(0.144063, 0.144063, 0.144062, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nvpjn"]
+bg_color = Color(0.145098, 0.145098, 0.145098, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_redw7"]
+bg_color = Color(0.277528, 0.277528, 0.277528, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wed3b"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="Quiz" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nvpjn")
+source = ExtResource("2_wed3b")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 723.0
+color = Color(0, 0, 0, 1)
+
+[node name="Delivery_me" type="TextureRect" parent="."]
+z_index = 2
+layout_mode = 0
+offset_left = 14.0
+offset_top = -39.0
+offset_right = 282.0
+offset_bottom = 205.0
+texture = ExtResource("2_kgkd6")
+expand_mode = 1
+
+[node name="Try_Again" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 232.0
+offset_top = 136.0
+offset_right = 1048.0
+offset_bottom = 608.0
+texture = ExtResource("5_g1cwy")
+expand_mode = 1
+
+[node name="Nurse" type="TextureRect" parent="."]
+visible = false
+z_index = 1
+layout_mode = 0
+offset_left = -208.0
+offset_top = 464.0
+offset_right = 464.0
+offset_bottom = 808.0
+texture = ExtResource("3_kgkd6")
+expand_mode = 1
+
+[node name="Answer_Node" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="texture" type="VBoxContainer" parent="Answer_Node"]
+layout_mode = 0
+offset_left = 344.0
+offset_top = 88.0
+offset_right = 944.0
+offset_bottom = 458.0
+
+[node name="answer_texture" type="TextureRect" parent="Answer_Node/texture"]
+clip_contents = true
+custom_minimum_size = Vector2(200, 350)
+layout_mode = 2
+expand_mode = 1
+
+[node name="texture_label" type="Label" parent="Answer_Node/texture"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_g1cwy")
+theme_override_font_sizes/font_size = 12
+clip_text = true
+
+[node name="Answer" type="VBoxContainer" parent="Answer_Node"]
+layout_mode = 0
+offset_left = 256.0
+offset_top = 64.0
+offset_right = 1152.0
+offset_bottom = 640.0
+
+[node name="answer_video" type="VideoStreamPlayer" parent="Answer_Node/Answer"]
+custom_minimum_size = Vector2(0, 450)
+layout_mode = 2
+volume_db = -80.0
+expand = true
+loop = true
+
+[node name="answer_audio" type="AudioStreamPlayer" parent="Answer_Node/Answer"]
+
+[node name="answer_choice" type="Label" parent="Answer_Node/Answer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_fonts/font = ExtResource("3_g1cwy")
+theme_override_font_sizes/font_size = 24
+clip_text = true
+
+[node name="answer_description" type="RichTextLabel" parent="Answer_Node/Answer"]
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("3_g1cwy")
+theme_override_font_sizes/normal_font_size = 18
+bbcode_enabled = true
+scroll_following = true
+
+[node name="refer" type="Label" parent="Answer_Node/Answer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_g1cwy")
+theme_override_font_sizes/font_size = 10
+horizontal_alignment = 2
+
+[node name="answer_icon" type="Button" parent="Answer_Node"]
+z_index = 2
+clip_contents = true
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+offset_left = 1008.0
+offset_top = 72.0
+offset_right = 1174.0
+offset_bottom = 143.0
+icon = ExtResource("6_7bg5i")
+flat = true
+expand_icon = true
+
+[node name="Label" type="Label" parent="Answer_Node"]
+layout_mode = 2
+offset_left = 909.0
+offset_top = 453.0
+offset_right = 1175.0
+offset_bottom = 467.0
+theme_override_fonts/font = ExtResource("3_g1cwy")
+theme_override_font_sizes/font_size = 10
+text = "ปกก"
+
+[node name="Extra_Node" type="Control" parent="Answer_Node"]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="NEXT" type="Button" parent="Answer_Node/Extra_Node"]
+visible = false
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 0
+offset_left = 480.0
+offset_top = 640.0
+offset_right = 787.0
+offset_bottom = 708.0
+theme_override_fonts/font = ExtResource("3_g1cwy")
+theme_override_font_sizes/font_size = 45
+text = "--กดเพื่อไปต่อ--"
+flat = true
+
+[node name="Extra_background" type="TextureRect" parent="Answer_Node/Extra_Node"]
+clip_contents = true
+layout_mode = 0
+offset_left = 136.0
+offset_top = 72.0
+offset_right = 1144.0
+offset_bottom = 632.0
+texture = ExtResource("8_wed3b")
+expand_mode = 1
+
+[node name="Extra" type="RichTextLabel" parent="Answer_Node/Extra_Node/Extra_background"]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 103.0
+offset_right = 912.0
+offset_bottom = 520.0
+theme_override_fonts/normal_font = ExtResource("3_g1cwy")
+theme_override_font_sizes/normal_font_size = 26
+bbcode_enabled = true
+
+[node name="Tag" type="HBoxContainer" parent="Answer_Node/Extra_Node/Extra_background"]
+z_index = 1
+layout_mode = 0
+offset_left = 17.0
+offset_top = 44.0
+offset_right = 162.0
+offset_bottom = 81.0
+
+[node name="Index" type="TextEdit" parent="Answer_Node/Extra_Node/Extra_background/Tag"]
+custom_minimum_size = Vector2(35, 35)
+layout_mode = 2
+theme_override_colors/font_readonly_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_g1cwy")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_7bg5i")
+theme_override_styles/read_only = SubResource("StyleBoxFlat_5806h")
+text = " #1"
+editable = false
+scroll_fit_content_height = true
+scroll_fit_content_width = true
+
+[node name="Types" type="TextEdit" parent="Answer_Node/Extra_Node/Extra_background/Tag"]
+custom_minimum_size = Vector2(100, 35)
+layout_mode = 2
+theme_override_colors/font_readonly_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_g1cwy")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_k3hp7")
+theme_override_styles/read_only = SubResource("StyleBoxFlat_euybl")
+text = "Answer"
+editable = false
+scroll_fit_content_height = true
+scroll_fit_content_width = true
+
+[node name="Extra_refer" type="Label" parent="Answer_Node/Extra_Node"]
+layout_mode = 0
+offset_left = 817.0
+offset_top = 667.0
+offset_right = 866.0
+offset_bottom = 702.0
+theme_override_fonts/font = ExtResource("3_g1cwy")
+theme_override_font_sizes/font_size = 12
+text = "dadad
+กฟกฟก"
+
+[node name="Quiz_Node" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="quiz_panel" type="TextEdit" parent="Quiz_Node"]
+layout_mode = 0
+offset_left = 216.0
+offset_top = 96.0
+offset_right = 1144.0
+offset_bottom = 648.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_1f0vb")
+editable = false
+
+[node name="Tag" type="HBoxContainer" parent="Quiz_Node/quiz_panel"]
+z_index = 1
+layout_mode = 0
+offset_left = 24.0
+offset_top = 11.0
+offset_right = 163.0
+offset_bottom = 48.0
+
+[node name="Index" type="TextEdit" parent="Quiz_Node/quiz_panel/Tag"]
+custom_minimum_size = Vector2(35, 35)
+layout_mode = 2
+theme_override_colors/font_readonly_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_g1cwy")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_7bg5i")
+text = " #1"
+editable = false
+scroll_fit_content_height = true
+scroll_fit_content_width = true
+
+[node name="Types" type="TextEdit" parent="Quiz_Node/quiz_panel/Tag"]
+custom_minimum_size = Vector2(100, 35)
+layout_mode = 2
+theme_override_colors/background_color = Color(0.145098, 0.145098, 0.145098, 1)
+theme_override_colors/font_readonly_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_g1cwy")
+theme_override_font_sizes/font_size = 18
+text = "Question"
+editable = false
+scroll_fit_content_height = true
+scroll_fit_content_width = true
+
+[node name="Question" type="RichTextLabel" parent="Quiz_Node/quiz_panel"]
+layout_mode = 0
+offset_left = 37.0
+offset_top = 64.0
+offset_right = 883.0
+offset_bottom = 144.0
+theme_override_fonts/normal_font = ExtResource("3_g1cwy")
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "1.
+dada"
+fit_content = true
+
+[node name="Button_A" type="Button" parent="Quiz_Node/quiz_panel"]
+custom_minimum_size = Vector2(120, 35)
+layout_mode = 2
+offset_left = 104.0
+offset_top = 176.0
+offset_right = 304.0
+offset_bottom = 232.0
+theme_override_constants/icon_max_width = 160
+theme_override_fonts/font = ExtResource("3_g1cwy")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_nvpjn")
+text = " A. เมื่อศีรษะทารกโผล่จนเห็นคิ้ว"
+alignment = 0
+icon_alignment = 1
+
+[node name="Button_B" type="Button" parent="Quiz_Node/quiz_panel"]
+custom_minimum_size = Vector2(120, 35)
+layout_mode = 0
+offset_left = 552.0
+offset_top = 176.0
+offset_right = 752.0
+offset_bottom = 232.0
+theme_override_constants/icon_max_width = 160
+theme_override_fonts/font = ExtResource("3_g1cwy")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_nvpjn")
+text = " B."
+alignment = 0
+icon_alignment = 1
+
+[node name="Button_C" type="Button" parent="Quiz_Node/quiz_panel"]
+custom_minimum_size = Vector2(120, 35)
+layout_mode = 0
+offset_left = 104.0
+offset_top = 352.0
+offset_right = 304.0
+offset_bottom = 408.0
+theme_override_constants/icon_max_width = 160
+theme_override_fonts/font = ExtResource("3_g1cwy")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_nvpjn")
+text = " C."
+alignment = 0
+icon_alignment = 1
+
+[node name="Button_D" type="Button" parent="Quiz_Node/quiz_panel"]
+custom_minimum_size = Vector2(120, 35)
+layout_mode = 0
+offset_left = 552.0
+offset_top = 352.0
+offset_right = 752.0
+offset_bottom = 408.0
+theme_override_constants/icon_max_width = 160
+theme_override_fonts/font = ExtResource("3_g1cwy")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_nvpjn")
+text = " D. dadadadadadadd
+"
+alignment = 0
+icon_alignment = 1
+
+[node name="quiz_img" type="TextureRect" parent="Quiz_Node"]
+visible = false
+clip_contents = true
+layout_mode = 0
+offset_left = 264.0
+offset_top = 272.0
+offset_right = 728.0
+offset_bottom = 536.0
+expand_mode = 1
+
+[node name="Score" type="Label" parent="Quiz_Node"]
+layout_mode = 0
+offset_left = 1110.0
+offset_top = 14.0
+offset_right = 1277.0
+offset_bottom = 80.0
+theme_override_colors/font_shadow_color = Color(0, 1, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 1, 0, 1)
+theme_override_fonts/font = ExtResource("3_g1cwy")
+theme_override_font_sizes/font_size = 50
+text = "0/10"
+horizontal_alignment = 1
+
+[node name="Scenario_Node" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Scenario_Block" type="VBoxContainer" parent="Scenario_Node"]
+layout_mode = 0
+offset_left = 288.0
+offset_top = 128.0
+offset_right = 1001.0
+offset_bottom = 623.0
+theme_override_constants/separation = 20
+
+[node name="Scenario_Video" type="VideoStreamPlayer" parent="Scenario_Node/Scenario_Block"]
+custom_minimum_size = Vector2(150, 350)
+layout_mode = 2
+volume_db = -80.0
+expand = true
+
+[node name="Scenario_audio" type="AudioStreamPlayer" parent="Scenario_Node/Scenario_Block"]
+
+[node name="Progress_Bar" type="HSlider" parent="Scenario_Node/Scenario_Block"]
+visible = false
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+editable = false
+scrollable = false
+
+[node name="Tag" type="HBoxContainer" parent="Scenario_Node/Scenario_Block"]
+z_index = 1
+layout_mode = 2
+
+[node name="Index" type="TextEdit" parent="Scenario_Node/Scenario_Block/Tag"]
+custom_minimum_size = Vector2(35, 35)
+layout_mode = 2
+theme_override_colors/font_readonly_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_g1cwy")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_7bg5i")
+text = " #0"
+editable = false
+scroll_fit_content_height = true
+scroll_fit_content_width = true
+
+[node name="Types" type="TextEdit" parent="Scenario_Node/Scenario_Block/Tag"]
+custom_minimum_size = Vector2(100, 35)
+layout_mode = 2
+theme_override_colors/background_color = Color(0, 0, 0, 1)
+theme_override_colors/font_readonly_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_g1cwy")
+theme_override_font_sizes/font_size = 18
+text = "Scenario"
+editable = false
+scroll_fit_content_height = true
+scroll_fit_content_width = true
+
+[node name="NEXT" type="Button" parent="Scenario_Node/Scenario_Block"]
+visible = false
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_g1cwy")
+theme_override_font_sizes/font_size = 45
+text = "--กดเพื่อไปต่อ--"
+flat = true
+
+[node name="SKIP" type="Button" parent="Scenario_Node"]
+layout_mode = 0
+offset_left = 1128.0
+offset_top = 16.0
+offset_right = 1264.0
+offset_bottom = 56.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_redw7")
+text = "SKIP"
+
+[node name="END" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Congratulation" type="Label" parent="END"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -353.0
+offset_top = 155.0
+offset_right = 353.0
+offset_bottom = 306.18
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("3_g1cwy")
+theme_override_font_sizes/font_size = 80
+text = "Congratulation"
+horizontal_alignment = 1
+
+[node name="SCORE" type="Label" parent="END"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -332.0
+offset_top = -126.0
+offset_right = 332.0
+offset_bottom = 187.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_g1cwy")
+theme_override_font_sizes/font_size = 240
+theme_override_styles/normal = SubResource("StyleBoxFlat_wed3b")
+text = "10/10"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="Answer_Node/answer_icon" to="." method="_on_answer_icon_pressed"]
+[connection signal="button_down" from="Answer_Node/Extra_Node/NEXT" to="." method="_on_button_button_down"]
+[connection signal="pressed" from="Quiz_Node/quiz_panel/Button_A" to="." method="_on_button_a_pressed"]
+[connection signal="pressed" from="Quiz_Node/quiz_panel/Button_B" to="." method="_on_button_b_pressed"]
+[connection signal="pressed" from="Quiz_Node/quiz_panel/Button_C" to="." method="_on_button_c_pressed"]
+[connection signal="pressed" from="Quiz_Node/quiz_panel/Button_D" to="." method="_on_button_d_pressed"]
+[connection signal="finished" from="Scenario_Node/Scenario_Block/Scenario_Video" to="." method="_on_scenario_video_finished"]
+[connection signal="button_down" from="Scenario_Node/Scenario_Block/NEXT" to="." method="_on_button_button_down"]
+[connection signal="pressed" from="Scenario_Node/SKIP" to="." method="_on_skip_pressed"]

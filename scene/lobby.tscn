@@ -1,0 +1,179 @@
+[gd_scene load_steps=13 format=3 uid="uid://cgiue3cbegj2x"]
+
+[ext_resource type="Script" uid="uid://dxsgouey86164" path="res://script/lobby.gd" id="1_hmohn"]
+[ext_resource type="Texture2D" uid="uid://jik7mqa3biyq" path="res://asset/Lobby/Lobby.png" id="3_kfmeg"]
+[ext_resource type="FontFile" uid="uid://qihwbx7hti2m" path="res://asset/Lobby/NotoSerifThai-VariableFont_wdth,wght.ttf" id="3_ofneh"]
+[ext_resource type="AudioStream" uid="uid://wl4xmphgoohw" path="res://asset/Lobby/Lobby.ogg" id="4_kfmeg"]
+
+[sub_resource type="Animation" id="Animation_0tjn4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Tap-to-start:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ofneh"]
+resource_name = "tts_Blink"
+length = 0.5
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Tap-to-start:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.121569), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_kfmeg"]
+resource_name = "tts_go_up"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Tap-to-start:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(740, 1142), Vector2(740, 874)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xq30h"]
+_data = {
+&"RESET": SubResource("Animation_0tjn4"),
+&"tts_Blink": SubResource("Animation_ofneh"),
+&"tts_go_up": SubResource("Animation_kfmeg")
+}
+
+[sub_resource type="Animation" id="Animation_gult8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("black_screen:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_xq30h"]
+resource_name = "fade_in"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("black_screen:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_dd5k0"]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("black_screen:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gtjb6"]
+_data = {
+&"RESET": SubResource("Animation_gult8"),
+&"fade_in": SubResource("Animation_xq30h"),
+&"fade_out": SubResource("Animation_dd5k0")
+}
+
+[node name="Lobby" type="Control"]
+custom_minimum_size = Vector2(1152, 648)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hmohn")
+
+[node name="Bg" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_kfmeg")
+expand_mode = 1
+
+[node name="Tap-to-start" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -220.0
+offset_top = 44.0
+offset_right = 220.0
+offset_bottom = 144.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("3_ofneh")
+theme_override_font_sizes/font_size = 62
+text = "-- กดเพื่อไปต่อ --"
+
+[node name="ttp-animation" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_xq30h")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_kfmeg")
+
+[node name="black_screen" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="transition" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_gtjb6")
+}
+
+[connection signal="animation_finished" from="ttp-animation" to="." method="_on_ttpanimation_animation_finished"]
+[connection signal="animation_finished" from="transition" to="." method="_on_transition_animation_finished"]
